@@ -5,7 +5,6 @@
   <%= link_to "学習終了",studies_path,method: :post %>
 <% end %>
 
-<% @studies.each_slice(2) do |studies| %>
-  <%= studies[0].data %>
-  <%= studies[1].time.round-studies[0].time.round %>
-<% end %>
+<% @study_dates.each do |date| %>
+  <% date.studies.each do |study| %>
+    <%= study.time

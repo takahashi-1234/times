@@ -1,10 +1,14 @@
 class StudiesController < ApplicationController
   def new
     @study=Study.last
-    @studies=Study.all
+    @study_dates=StudyDate.all
   end
   def create
-    Study.create(time: Time.now,data: Date.today)
+    @study_date=StudyDate.find_by(study_date: Date.today)
+    if @study_date.nil?
+      @study_date=StudyDate.create(study_date: Date.today)
+    end
+    Study.create(time: Time.now, study_date_id: @study_date.id)
     redirect_to root_path
   end
 end
